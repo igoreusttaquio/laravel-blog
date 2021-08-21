@@ -21,8 +21,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts/{post}', function ($id) {   
-    $post = Post::findOrFail($id);
+# Model binding
+Route::get('/posts/{post:slug}', function (Post $post) {   
+    # Behind scenes: Post::where('slug', $post)->firstOrFail();
     return view('post', [
         'post' => $post,
     ]);
