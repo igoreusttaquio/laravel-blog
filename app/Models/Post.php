@@ -26,7 +26,8 @@ class Post {
 
     public static function all() {
 
-        $posts = collect(File::files(resource_path("posts/")))
+        return cache()->rememberForever("posts.all", function () {
+            return collect(File::files(resource_path("posts/")))
             ->map(function($file){
                 return YamlFrontMatter::parseFile($file);
             })
@@ -38,14 +39,14 @@ class Post {
                     $document->date,
                     $document->body
                 );
+            })->sortByDesc('date');
         });
-        return $posts;
     }
 
     public static function find($slug){
    
        $posts = static::all();
-       dd($posts);
+       //dd($posts);
        return $posts->firstWhere('slug',$slug);
     }
 }
