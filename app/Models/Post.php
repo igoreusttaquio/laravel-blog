@@ -10,6 +10,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $with = ['category', 'author'];
+
     # Specify with attributes can be mass assign.
     protected $fillable = ['title', 'excerpt', 'body'];
 

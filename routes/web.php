@@ -18,7 +18,7 @@ use App\Models\User;
 
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::latest('published_at')->with('category', 'author')->get(),
+        'posts' => Post::latest('published_at')->get(),
     ]);
 });
 
@@ -45,6 +45,6 @@ Route::get('/author/{author:username}', function (User $author) {
 Route::get('/authors/{author:username}', function (User $author) {   
     # Behind scenes: Post::where('slug', $post)->firstOrFail();
     return view('posts', [
-        'posts' => $author->posts->load(['category', 'author']),
+        'posts' => $author->posts,
     ]);
 });
