@@ -7,7 +7,7 @@
             <p>
                 <a href="/categories/{{$post->category->slug}}">{{$post->category->name}}</a>
             </p>
-            {{ $post->excerpt }}
+            {!! $post->excerpt !!}
         </article>
     @endforeach
 @endsection
