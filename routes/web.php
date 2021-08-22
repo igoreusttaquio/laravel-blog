@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,11 @@ Route::get('/posts/{post:slug}', function (Post $post) {
     # Behind scenes: Post::where('slug', $post)->firstOrFail();
     return view('post', [
         'post' => $post,
+    ]);
+});
+
+Route::get('/categories/{category:slug}', function (Category $category) {
+    return view('category', [
+        'category' => $category,
     ]);
 });
