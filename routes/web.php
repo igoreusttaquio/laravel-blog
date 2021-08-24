@@ -17,8 +17,15 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
+    $posts = Post::latest('published_at');
+
+    if (request('search')) {
+        $posts->where('title', 'like', "%".request('search')."%");
+    }
+
     return view('posts', [
-        'posts' => Post::latest('published_at')->get(),
+        'posts' => $posts->get(),
+        'categories' => Category::all()
     ]);
 });
 
