@@ -24,4 +24,11 @@ class Post extends Model
         $fk = 'user_id';
         return $this->belongsTo(User::class, $fk);
     }
+
+    public function scopeFilter($query, array $filters) # Post::newQuery()->filter()
+    {
+        if ($filters['serach'] ?? false) {
+            $query->where('title', 'like', "%".request('search')."%");
+        }
+    }
 }

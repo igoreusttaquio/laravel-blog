@@ -9,8 +9,8 @@ use App\Models\Category;
 class PostController extends Controller
 {
     public function index() {
-        return view('posts', [
-            'posts' => $this->getPosts(),
+        return view('posts', [      # is to be passed to the queryScope
+            'posts' => Post::filter(request(['search']))->get(),
             'categories' => Category::all()
         ]);
     }
@@ -20,13 +20,5 @@ class PostController extends Controller
         return view('post', [
             'post' => $post,
         ]);
-    }
-
-    protected function getPosts() {
-        $posts = Post::latest('published_at');
-        if (request('search')) {
-            $posts->where('title', 'like', "%".request('search')."%");
-        }
-        return $posts->get();
     }
 }
