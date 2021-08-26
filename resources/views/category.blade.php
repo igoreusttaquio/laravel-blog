@@ -1,9 +1,10 @@
 <x-layout>
     <h1>Category: {{$category->name}}</h1>
-    <h2>Posts in this category</h2>
-    <ul>
-        @foreach($category->posts as $post)
-        <li><a href="/posts/{{$post->slug}}">{{$post->title}}</a></li>
-        @endforeach
-    </ul>
+
+    <div class="items-center lg:justify-center text-sm mt-4">
+        <div class="ml-3 text-left">
+            @foreach($category->posts as $post)
+            <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
+            @endforeach
+        </div>
 </x-layout>

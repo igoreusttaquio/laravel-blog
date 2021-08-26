@@ -9,7 +9,7 @@ use App\Models\Category;
 class PostController extends Controller
 {
     public function index() {
-        return view('posts', [      # is to be passed to the queryScope
+        return view('posts.index', [      # is to be passed to the queryScope
             'posts' => Post::filter(request(['search']))->get(),
             'categories' => Category::all()
         ]);
